@@ -47,7 +47,11 @@
     <repositories>
         <repository>
             <id>plugily-repo</id>
-            <url>https://maven.plugily.xyz/</url>
+            <url>https://maven.plugily.xyz/releases</url>
+        </repository>
+        <repository>
+            <id>drkmatr1984-repo</id>
+            <url>https://minevolt.net/repo/</url>
         </repository>
         <repository>
             <id>papermc</id>
@@ -55,7 +59,7 @@
         </repository>
         <repository>
             <id>papi-repo</id>
-            <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
         <!-- repository is dead, contents moved to maven.plajer.xyz
          <repository>
@@ -72,7 +76,7 @@
         </repository>
         <repository>
             <id>simonsators-repo</id>
-            <url>http://simonsator.de/repo/</url>
+            <url>https://simonsator.de/repo/</url>
         </repository>
         <repository>
             <id>spigot-repo</id>
@@ -93,19 +97,19 @@
         <dependency>
             <groupId>plugily.projects</groupId>
             <artifactId>commons-box-classic</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>plugily.projects</groupId>
             <artifactId>commons-box-database</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>plugily.projects</groupId>
             <artifactId>commons-box-minecraft</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -272,17 +276,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- External beta versions discord deployer plugin -->
-            <plugin>
-                <groupId>plugily.projects</groupId>
-                <artifactId>betty-maven-plugin</artifactId>
-                <version>1.0.2</version>
-                <configuration>
-                    <changelogFile>${project.basedir}/CHANGELOG.md</changelogFile>
-                </configuration>
-            </plugin>
-            <!-- External beta versions discord deployer plugin -->
         </plugins>
         <extensions>
             <extension>
