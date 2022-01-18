@@ -61,26 +61,26 @@ public class SpectatorItemEvents implements Listener {
     chatManager = plugin.getChatManager();
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
     spectatorSettingsMenu = new SpectatorSettingsMenu(plugin, chatManager.colorMessage("In-Game.Spectator.Settings-Menu.Inventory-Name"),
-        chatManager.colorMessage("In-Game.Spectator.Settings-Menu.Speed-Name"));
+      chatManager.colorMessage("In-Game.Spectator.Settings-Menu.Speed-Name"));
   }
 
   @EventHandler
   public void onSpectatorItemClick(CBPlayerInteractEvent e) {
-    if(e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.PHYSICAL) {
+    if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.PHYSICAL) {
       return;
     }
     Arena arena = ArenaRegistry.getArena(e.getPlayer());
     ItemStack stack = VersionUtils.getItemInHand(e.getPlayer());
-    if(arena == null || !ItemUtils.isItemStackNamed(stack)) {
+    if (arena == null || !ItemUtils.isItemStackNamed(stack)) {
       return;
     }
-    if(plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.PLAYERS_LIST.getName())) {
+    if (plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.PLAYERS_LIST.getName())) {
       e.setCancelled(true);
       openSpectatorMenu(e.getPlayer(), arena);
-    } else if(plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.SPECTATOR_OPTIONS.getName())) {
+    } else if (plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.SPECTATOR_OPTIONS.getName())) {
       e.setCancelled(true);
       spectatorSettingsMenu.openSpectatorSettingsMenu(e.getPlayer());
-    } else if(plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.SPECTATOR_LEAVE_ITEM.getName())) {
+    } else if (plugin.getSpecialItemManager().getRelatedSpecialItem(stack).getName().equals(SpecialItemManager.SpecialItems.SPECTATOR_LEAVE_ITEM.getName())) {
       e.setCancelled(true);
       ArenaManager.leaveAttempt(e.getPlayer(), arena);
     }
@@ -94,15 +94,15 @@ public class SpectatorItemEvents implements Listener {
 
     ItemStack skull = XMaterial.PLAYER_HEAD.parseItem();
 
-    for(Player arenaPlayer : arena.getPlayers()) {
-      if(plugin.getUserManager().getUser(arenaPlayer).isSpectator()) {
+    for (Player arenaPlayer : arena.getPlayers()) {
+      if (plugin.getUserManager().getUser(arenaPlayer).isSpectator()) {
         continue;
       }
       ItemStack cloneSkull = skull.clone();
       SkullMeta meta = VersionUtils.setPlayerHead(arenaPlayer, (SkullMeta) cloneSkull.getItemMeta());
       ComplementAccessor.getComplement().setDisplayName(meta, arenaPlayer.getName());
       ComplementAccessor.getComplement().setLore(meta, Collections.singletonList(chatManager.colorMessage("In-Game.Spectator.Target-Player-Health")
-          .replace("%health%", Double.toString(NumberUtils.round(arenaPlayer.getHealth(), 2)))));
+        .replace("%health%", Double.toString(NumberUtils.round(arenaPlayer.getHealth(), 2)))));
       cloneSkull.setItemMeta(meta);
       pane.addItem(new GuiItem(cloneSkull, e -> {
         e.setCancelled(true);

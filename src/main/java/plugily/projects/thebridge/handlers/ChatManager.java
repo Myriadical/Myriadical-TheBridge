@@ -57,11 +57,11 @@ public class ChatManager {
   }
 
   public String colorRawMessage(String message) {
-    if(message == null) {
+    if (message == null) {
       return "";
     }
 
-    if(message.contains("#") && ServerVersion.Version.isCurrentEqualOrHigher(ServerVersion.Version.v1_16_R1)) {
+    if (message.contains("#") && ServerVersion.Version.isCurrentEqualOrHigher(ServerVersion.Version.v1_16_R1)) {
       message = Utils.matchColorRegex(message);
     }
 
@@ -70,15 +70,15 @@ public class ChatManager {
 
   public String colorMessage(String message, Player player) {
     String returnString = LanguageManager.getLanguageMessage(message);
-    if(plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+    if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
       returnString = PlaceholderAPI.setPlaceholders(player, returnString);
     }
     return colorRawMessage(returnString);
   }
 
   public void broadcast(Arena arena, String message) {
-    if(message != null && !message.isEmpty()) {
-      for(Player player : arena.getPlayers()) {
+    if (message != null && !message.isEmpty()) {
+      for (Player player : arena.getPlayers()) {
         player.sendMessage(pluginPrefix + message);
       }
     }
@@ -95,7 +95,7 @@ public class ChatManager {
     String returnString = message;
     returnString = StringUtils.replace(returnString, "%PLAYER%", player.getName());
     returnString = colorRawMessage(formatPlaceholders(returnString, arena));
-    if(plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+    if (plugin.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
       returnString = PlaceholderAPI.setPlaceholders(player, returnString);
     }
     return returnString;
@@ -114,7 +114,7 @@ public class ChatManager {
 
   public void broadcastAction(Arena arena, Player player, ActionType action) {
     String path;
-    switch(action) {
+    switch (action) {
       case JOIN:
         path = "In-Game.Messages.Join";
         break;

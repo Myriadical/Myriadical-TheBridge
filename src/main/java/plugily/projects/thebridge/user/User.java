@@ -87,10 +87,10 @@ public class User {
   }
 
   public int getStat(StatsStorage.StatisticType stat) {
-    if(!stats.containsKey(stat)) {
+    if (!stats.containsKey(stat)) {
       stats.put(stat, 0);
       return 0;
-    } else if(stats.get(stat) == null) {
+    } else if (stats.get(stat) == null) {
       return 0;
     }
     return stats.get(stat);
@@ -98,7 +98,7 @@ public class User {
 
   public void removeScoreboard(Arena arena) {
     arena.getScoreboardManager().removeScoreboard(this);
-    if(lastBoard != null) {
+    if (lastBoard != null) {
       getPlayer().setScoreboard(lastBoard);
       lastBoard = null;
     }

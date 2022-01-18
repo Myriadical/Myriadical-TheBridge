@@ -52,7 +52,7 @@ public class SpawnComponents implements SetupComponent {
   @Override
   public void injectComponents(StaticPane pane) {
     Arena arena = setupInventory.getArena();
-    if(arena == null) {
+    if (arena == null) {
       return;
     }
     Player player = setupInventory.getPlayer();
@@ -128,7 +128,7 @@ public class SpawnComponents implements SetupComponent {
       .build(), e -> {
       e.getWhoClicked().closeInventory();
       CuboidSelector.Selection selection = plugin.getCuboidSelector().getSelection(player);
-      if(selection == null || selection.getFirstPos() == null || selection.getSecondPos() == null) {
+      if (selection == null || selection.getFirstPos() == null || selection.getSecondPos() == null) {
         player.sendMessage(plugin.getChatManager().colorRawMessage(plugin.getChatManager().getPrefix() + "&cPlease select both corners before adding an arena location!"));
         return;
       }

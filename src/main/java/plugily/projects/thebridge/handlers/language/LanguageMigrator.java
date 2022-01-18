@@ -49,7 +49,7 @@ public class LanguageMigrator {
   }
 
   private void configUpdate() {
-    if(plugin.getConfig().getInt("Version") == CONFIG_FILE_VERSION) {
+    if (plugin.getConfig().getInt("Version") == CONFIG_FILE_VERSION) {
       return;
     }
     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[The Bridge] System notify >> Your config file is outdated! Updating...");
@@ -58,53 +58,53 @@ public class LanguageMigrator {
 
     int version = plugin.getConfig().getInt("Version", CONFIG_FILE_VERSION - 1);
 
-    for(int i = version; i < CONFIG_FILE_VERSION; i++) {
-      switch(i) {
+    for (int i = version; i < CONFIG_FILE_VERSION; i++) {
+      switch (i) {
         case 1:
           MigratorUtils.addNewLines(file, "\r\n" +
-              "#Disable Party features of external party plugins (such as PAF, Parties ...)\r\n" +
-              "Disable-Parties: true\r\n");
+            "#Disable Party features of external party plugins (such as PAF, Parties ...)\r\n" +
+            "Disable-Parties: true\r\n");
           MigratorUtils.addNewLines(file, "\r\n" +
-              "# Should we disable all chat related stuff?\r\n" +
-              "# It will disable the separated chat, for example\r\n" +
-              "Disable-Separate-Chat: false\r\n");
+            "# Should we disable all chat related stuff?\r\n" +
+            "# It will disable the separated chat, for example\r\n" +
+            "Disable-Separate-Chat: false\r\n");
           MigratorUtils.addNewLines(file, "\r\n" +
-              "# Enable in game (eg. '[KIT][BASE][LEVEL] Plugily: hey') special formatting?\r\n" +
-              "# Formatting is configurable in language.yml\r\n" +
-              "# You can use PlaceholderAPI placeholders in chat format!\r\n" +
-              "ChatFormat-Enabled: true\r\n");
+            "# Enable in game (eg. '[KIT][BASE][LEVEL] Plugily: hey') special formatting?\r\n" +
+            "# Formatting is configurable in language.yml\r\n" +
+            "# You can use PlaceholderAPI placeholders in chat format!\r\n" +
+            "ChatFormat-Enabled: true\r\n");
           MigratorUtils.addNewLines(file, "\r\n" +
-              "# Enable bossbar support?\r\n" +
-              "Bossbar-Enabled: true\r\n");
+            "# Enable bossbar support?\r\n" +
+            "Bossbar-Enabled: true\r\n");
           MigratorUtils.addNewLines(file, "\r\n" +
-              "# Select locale of The Bridge, default it's English.\r\n" +
-              "# Available locales:\r\n" +
-              "#    default - English language. Uses 'language.yml'.\r\n" +
-              "#    de - Deutsche sprache          pl - Język polski\r\n" +
-              "#    es - Idioma español\r\n" +
-              "#    fr - Langue française\r\n" +
-              "#    hu - Magyar nyelv\r\n" +
-              "#    cs - Český jazyk\r\n" +
-              "#    pt_br - Português Brasileiro\r\n" +
-              "#    it - Lingua italiana           ru - Русский язык\r\n" +
-              "#    nl - Dutch\r\n" +
-              "locale: default\r\n");
+            "# Select locale of The Bridge, default it's English.\r\n" +
+            "# Available locales:\r\n" +
+            "#    default - English language. Uses 'language.yml'.\r\n" +
+            "#    de - Deutsche sprache          pl - Język polski\r\n" +
+            "#    es - Idioma español\r\n" +
+            "#    fr - Langue française\r\n" +
+            "#    hu - Magyar nyelv\r\n" +
+            "#    cs - Český jazyk\r\n" +
+            "#    pt_br - Português Brasileiro\r\n" +
+            "#    it - Lingua italiana           ru - Русский язык\r\n" +
+            "#    nl - Dutch\r\n" +
+            "locale: default\r\n");
           break;
         case 2:
           MigratorUtils.addNewLines(file, "\r\n" +
-              "#Disable Food lose\r\n" +
-              "Disable-Food-Lose: true\r\n");
+            "#Disable Food lose\r\n" +
+            "Disable-Food-Lose: true\r\n");
           break;
         case 3:
           MigratorUtils.addNewLines(file, "\r\n" +
-              "Arena-Selector:\r\n" +
-              "  # Change items of arena selector\r\n" +
-              "  State-Item:\r\n" +
-              "    Waiting: LIME_wool\r\n" +
-              "    Starting: YELLOW_wool\r\n" +
-              "    In-Game: RED_wool\r\n" +
-              "    Ending: RED_wool\r\n" +
-              "    Restarting: RED_wool\r\n");
+            "Arena-Selector:\r\n" +
+            "  # Change items of arena selector\r\n" +
+            "  State-Item:\r\n" +
+            "    Waiting: LIME_wool\r\n" +
+            "    Starting: YELLOW_wool\r\n" +
+            "    In-Game: RED_wool\r\n" +
+            "    Ending: RED_wool\r\n" +
+            "    Restarting: RED_wool\r\n");
           break;
         default:
           break;
@@ -119,13 +119,13 @@ public class LanguageMigrator {
 
   private void languageFileUpdate() {
     FileConfiguration config = ConfigUtils.getConfig(plugin, "language");
-    if(config.getString("File-Version-Do-Not-Edit", "").equals(String.valueOf(LANGUAGE_FILE_VERSION))) {
+    if (config.getString("File-Version-Do-Not-Edit", "").equals(String.valueOf(LANGUAGE_FILE_VERSION))) {
       return;
     }
     Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "[The Bridge] [System notify] Your language file is outdated! Updating...");
 
     int version = LANGUAGE_FILE_VERSION - 1;
-    if(NumberUtils.isNumber(config.getString("File-Version-Do-Not-Edit"))) {
+    if (NumberUtils.isNumber(config.getString("File-Version-Do-Not-Edit"))) {
       version = Integer.parseInt(config.getString("File-Version-Do-Not-Edit"));
     } else {
       Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[The Bridge] [System notify] Failed to parse language file version!");
@@ -134,28 +134,28 @@ public class LanguageMigrator {
 
     File file = new File(plugin.getDataFolder() + "/language.yml");
 
-    for(int i = version; i < LANGUAGE_FILE_VERSION; i++) {
-      switch(version) {
+    for (int i = version; i < LANGUAGE_FILE_VERSION; i++) {
+      switch (version) {
         case 1:
           MigratorUtils.insertAfterLine(file, "  Item:", "    Name: \"&f%mapname%\"");
           break;
         case 2:
           MigratorUtils.insertAfterLine(file, "  Stats-Command:", "    Wins: \"&aWins: &e\"\n" +
-              "    Loses: \"&aLoses: &e\"");
+            "    Loses: \"&aLoses: &e\"");
           break;
         case 3:
           MigratorUtils.addNewLines(file, "Placeholders:\r\n" +
-              "  Game-States:\r\n" +
-              "    Waiting: \"&lWaiting for players...\"\r\n" +
-              "    Starting: \"&e&lStarting\"\r\n" +
-              "    Playing: \"&lPlaying\"\r\n" +
-              "    Ending: \"&lEnding\"\r\n" +
-              "    Restarting: \"&c&lRestarting\"\r\n");
+            "  Game-States:\r\n" +
+            "    Waiting: \"&lWaiting for players...\"\r\n" +
+            "    Starting: \"&e&lStarting\"\r\n" +
+            "    Playing: \"&lPlaying\"\r\n" +
+            "    Ending: \"&lEnding\"\r\n" +
+            "    Restarting: \"&c&lRestarting\"\r\n");
           break;
         case 4:
           MigratorUtils.insertAfterLine(file, "    Portal:", "      Scored:\r\n" +
-              "        Title: \"&7%base% %player%\"\r\n" +
-              "        Subtitle: \"jumped into %base_jumped%\"\r\n");
+            "        Title: \"&7%base% %player%\"\r\n" +
+            "        Subtitle: \"jumped into %base_jumped%\"\r\n");
           break;
         case 5:
           MigratorUtils.insertAfterLine(file, "In-Game:", "  Game-Death-Format: \"&7[&4☠&7] &r\"\r\n");

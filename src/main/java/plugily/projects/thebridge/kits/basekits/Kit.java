@@ -100,15 +100,15 @@ public abstract class Kit {
 
   public ItemStack getItemStack() {
     return new ItemBuilder(getMaterial())
-        .name(getName())
-        .lore(getDescription())
-        .build();
+      .name(getName())
+      .lore(getDescription())
+      .build();
   }
 
   public void addBuildBlocks(Player player, Arena arena) {
     ItemStack itemStack = XMaterial.matchXMaterial(arena.getBase(player).getMaterialColor().toUpperCase() + getPlugin().getConfigPreferences().getColoredBlockMaterial()).get().parseItem();
     itemStack.setAmount(64);
-    if(player.getInventory().getItem(8) == null) {
+    if (player.getInventory().getItem(8) == null) {
       player.getInventory().setItem(8, itemStack);
       return;
     }

@@ -48,7 +48,7 @@ public class UserManager {
   private final Main plugin;
 
   public UserManager(Main plugin) {
-    if(plugin.getConfigPreferences().getOption(ConfigPreferences.Option.DATABASE_ENABLED)) {
+    if (plugin.getConfigPreferences().getOption(ConfigPreferences.Option.DATABASE_ENABLED)) {
       database = new MysqlManager(plugin);
       Debugger.debug("MySQL Stats enabled");
     } else {
@@ -64,8 +64,8 @@ public class UserManager {
   }
 
   public User getUser(Player player) {
-    for(User user : users) {
-      if(user.getPlayer().equals(player)) {
+    for (User user : users) {
+      if (user.getPlayer().equals(player)) {
         return user;
       }
     }
@@ -80,7 +80,7 @@ public class UserManager {
   }
 
   public void saveStatistic(User user, StatsStorage.StatisticType stat) {
-    if(!stat.isPersistent()) {
+    if (!stat.isPersistent()) {
       return;
     }
     database.saveStatistic(user, stat);
@@ -89,7 +89,7 @@ public class UserManager {
   public void addExperience(Player player, int i) {
     User user = plugin.getUserManager().getUser(player);
     user.addStat(StatsStorage.StatisticType.XP, i);
-    if(player.hasPermission(PermissionsManager.getAllKitsPerm())) {
+    if (player.hasPermission(PermissionsManager.getAllKitsPerm())) {
       user.addStat(StatsStorage.StatisticType.XP, (int) Math.ceil(i / 2.0));
     }
     updateLevelStat(player, ArenaRegistry.getArena(player));
@@ -103,10 +103,10 @@ public class UserManager {
 
   public void updateLevelStat(Player player, Arena arena) {
     User user = plugin.getUserManager().getUser(player);
-    if(Math.pow(50.0 * user.getStat(StatsStorage.StatisticType.LEVEL), 1.5) < user.getStat(StatsStorage.StatisticType.XP)) {
+    if (Math.pow(50.0 * user.getStat(StatsStorage.StatisticType.LEVEL), 1.5) < user.getStat(StatsStorage.StatisticType.XP)) {
       user.addStat(StatsStorage.StatisticType.LEVEL, 1);
       //Arena can be null when player has left the arena before this message the arena is retrieved.
-      if(arena != null)
+      if (arena != null)
         player.sendMessage(plugin.getChatManager().getPrefix() + plugin.getChatManager().formatMessage(arena, plugin.getChatManager().colorMessage("In-Game.You-Leveled-Up"), user.getStat(StatsStorage.StatisticType.LEVEL)));
     }
   }

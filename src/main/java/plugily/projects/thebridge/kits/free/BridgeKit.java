@@ -58,12 +58,12 @@ public class BridgeKit extends FreeKit {
     player.getInventory().addItem(WeaponHelper.getEnchantedBow(Enchantment.ARROW_INFINITE, 10));
     player.getInventory().setItem(9, XMaterial.ARROW.parseItem());
     player.getInventory().addItem(WeaponHelper.getEnchanted(XMaterial.DIAMOND_PICKAXE.parseItem(), new Enchantment[]{
-        Enchantment.DURABILITY, Enchantment.DIG_SPEED}, new int[]{10, 2}));
+      Enchantment.DURABILITY, Enchantment.DIG_SPEED}, new int[]{10, 2}));
     player.getInventory().addItem(new ItemStack(XMaterial.GOLDEN_APPLE.parseMaterial(), 5));
     VersionUtils.setMaxHealth(player, 20.0);
     player.setHealth(20.0);
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     ArmorHelper.setColouredArmor(ColorUtil.fromChatColor(ChatColor.valueOf(arena.getBase(player).getColor().toUpperCase())), player);
@@ -78,7 +78,7 @@ public class BridgeKit extends FreeKit {
   @Override
   public void reStock(Player player) {
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     addBuildBlocks(player, arena);

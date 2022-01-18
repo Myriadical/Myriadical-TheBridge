@@ -57,22 +57,22 @@ public class TabCompletion implements TabCompleter {
     List<String> commands = new ArrayList<>();
     String partOfCommand = null;
 
-    if(cmd.getName().equalsIgnoreCase("thebridgeadmin")) {
-      if(args.length == 1) {
+    if (cmd.getName().equalsIgnoreCase("thebridgeadmin")) {
+      if (args.length == 1) {
         commands.addAll(registry.getMappedArguments().get(cmd.getName().toLowerCase()).stream().map(CommandArgument::getArgumentName)
           .collect(Collectors.toList()));
         partOfCommand = args[0];
-      } else if(args.length == 2 && args[0].equalsIgnoreCase("delete")) {
+      } else if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
         commands.addAll(ArenaRegistry.getArenas().stream().map(Arena::getId).collect(Collectors.toList()));
         partOfCommand = args[1];
       }
     }
 
-    if(cmd.getName().equalsIgnoreCase("thebridge")) {
-      if(args.length == 2 && args[0].equalsIgnoreCase("join")) {
+    if (cmd.getName().equalsIgnoreCase("thebridge")) {
+      if (args.length == 2 && args[0].equalsIgnoreCase("join")) {
         commands.addAll(ArenaRegistry.getArenas().stream().map(Arena::getId).collect(Collectors.toList()));
         partOfCommand = args[1];
-      } else if(args.length == 1) {
+      } else if (args.length == 1) {
         commands.addAll(registry.getMappedArguments().get(cmd.getName().toLowerCase()).stream().map(CommandArgument::getArgumentName)
           .collect(Collectors.toList()));
         partOfCommand = args[0];
@@ -80,9 +80,9 @@ public class TabCompletion implements TabCompleter {
     }
 
     // Completes the player names
-    if(commands.isEmpty() || partOfCommand == null) {
-      for(CompletableArgument completion : registeredCompletions) {
-        if(!cmd.getName().equalsIgnoreCase(completion.getMainCommand()) || !completion.getArgument().equalsIgnoreCase(args[0])) {
+    if (commands.isEmpty() || partOfCommand == null) {
+      for (CompletableArgument completion : registeredCompletions) {
+        if (!cmd.getName().equalsIgnoreCase(completion.getMainCommand()) || !completion.getArgument().equalsIgnoreCase(args[0])) {
           continue;
         }
         return completion.getCompletions();

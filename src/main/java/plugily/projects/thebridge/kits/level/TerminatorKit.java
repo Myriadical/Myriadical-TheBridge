@@ -67,7 +67,7 @@ public class TerminatorKit extends LevelKit {
     player.getInventory().addItem(Utils.getPotion(PotionType.STRENGTH, 2, true));
     player.getInventory().addItem(Utils.getPotion(PotionType.REGEN, 1, true));
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     ArmorHelper.setColouredArmor(ColorUtil.fromChatColor(ChatColor.valueOf(arena.getBase(player).getColor().toUpperCase())), player);
@@ -82,11 +82,11 @@ public class TerminatorKit extends LevelKit {
 
   @Override
   public void reStock(Player player) {
-    for(int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.getInventory().addItem(Utils.getPotion(PotionType.STRENGTH, 2, true));
     }
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     addBuildBlocks(player, arena);

@@ -57,7 +57,7 @@ public class StatsStorage {
     List list = new LinkedList<>(unsortMap.entrySet());
     list.sort((o1, o2) -> ((Comparable) ((Map.Entry) (o1)).getValue()).compareTo(((Map.Entry) (o2)).getValue()));
     Map sortedMap = new LinkedHashMap();
-    for(Object sort : list) {
+    for (Object sort : list) {
       Map.Entry entry = (Map.Entry) sort;
       sortedMap.put(entry.getKey(), entry.getValue());
     }
@@ -73,16 +73,16 @@ public class StatsStorage {
   @NotNull
   @Contract("null -> fail")
   public static Map<UUID, Integer> getStats(StatisticType stat) {
-    if(plugin.getConfigPreferences().getOption(ConfigPreferences.Option.DATABASE_ENABLED)) {
-      try(Connection connection = plugin.getMysqlDatabase().getConnection()) {
+    if (plugin.getConfigPreferences().getOption(ConfigPreferences.Option.DATABASE_ENABLED)) {
+      try (Connection connection = plugin.getMysqlDatabase().getConnection()) {
         Statement statement = connection.createStatement();
         ResultSet set = statement.executeQuery("SELECT UUID, " + stat.getName() + " FROM " + ((MysqlManager) plugin.getUserManager().getDatabase()).getTableName() + " ORDER BY " + stat.getName());
         Map<java.util.UUID, java.lang.Integer> column = new LinkedHashMap<>();
-        while(set.next()) {
+        while (set.next()) {
           column.put(java.util.UUID.fromString(set.getString("UUID")), set.getInt(stat.getName()));
         }
         return column;
-      } catch(SQLException e) {
+      } catch (SQLException e) {
         plugin.getLogger().log(Level.WARNING, "SQLException occurred! " + e.getSQLState() + " (" + e.getErrorCode() + ")");
         MessageUtils.errorOccurred();
         Bukkit.getConsoleSender().sendMessage("Cannot get contents from MySQL database!");
@@ -92,8 +92,8 @@ public class StatsStorage {
     }
     FileConfiguration config = ConfigUtils.getConfig(plugin, "stats");
     Map<UUID, Integer> stats = new TreeMap<>();
-    for(String string : config.getKeys(false)) {
-      if(string.equals("data-version")) {
+    for (String string : config.getKeys(false)) {
+      if (string.equals("data-version")) {
         continue;
       }
       stats.put(UUID.fromString(string), config.getInt(string + "." + stat.getName()));

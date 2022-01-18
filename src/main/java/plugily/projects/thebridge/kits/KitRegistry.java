@@ -105,8 +105,8 @@ public class KitRegistry {
    * @return Registered kit or default if not found
    */
   public static Kit getKit(ItemStack itemStack) {
-    for(Kit kit : kits) {
-      if(itemStack.getType() == kit.getMaterial()) {
+    for (Kit kit : kits) {
+      if (itemStack.getType() == kit.getMaterial()) {
         return kit;
       }
     }
@@ -117,11 +117,11 @@ public class KitRegistry {
   private static void setupGameKits() {
     BridgeKit bridgeKit = new BridgeKit();
     FileConfiguration config = ConfigUtils.getConfig(plugin, "kits");
-    for(Class<?> kitClass : classKitNames) {
-      if(config.getBoolean("Enabled-Game-Kits." + kitClass.getSimpleName().replace("Kit", ""))) {
+    for (Class<?> kitClass : classKitNames) {
+      if (config.getBoolean("Enabled-Game-Kits." + kitClass.getSimpleName().replace("Kit", ""))) {
         try {
           Class.forName(kitClass.getName()).newInstance();
-        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
           plugin.getLogger().log(Level.SEVERE, "Fatal error while registering existing game kit! Report this error to the developer!");
           plugin.getLogger().log(Level.SEVERE, "Cause: " + e.getMessage() + " (kitClass " + kitClass.getName() + ")");
         }

@@ -66,7 +66,7 @@ public class ArcherKit extends LevelKit {
 
     player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 10));
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     ArmorHelper.setColouredArmor(ColorUtil.fromChatColor(ChatColor.valueOf(arena.getBase(player).getColor().toUpperCase())), player);
@@ -82,7 +82,7 @@ public class ArcherKit extends LevelKit {
   @Override
   public void reStock(Player player) {
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     addBuildBlocks(player, arena);

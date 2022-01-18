@@ -1,6 +1,6 @@
 name: ${project.name}
 main: plugily.projects.thebridge.Main
-authors: [ Tigerpanzer, 2Wild4You ]
+authors: [ Tigerpanzer, 2Wild4You, sidious38 ]
 version: ${project.version}
 api-version: 1.13
 softdepend: [ PlaceholderAPI ]

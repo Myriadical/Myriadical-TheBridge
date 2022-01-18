@@ -54,10 +54,10 @@ public class ReloadArgument {
 
   public ReloadArgument(ArgumentsRegistry registry, ChatManager chatManager) {
     registry.mapArgument("thebridgeadmin", new LabeledCommandArgument("reload", "thebridge.admin.reload", CommandArgument.ExecutorType.BOTH,
-        new LabelData("/tba reload", "/tba reload", "&7Reload all game arenas and configurations\n&7&lArenas will be stopped!\n&6Permission: &7thebridge.admin.reload")) {
+      new LabelData("/tba reload", "/tba reload", "&7Reload all game arenas and configurations\n&7&lArenas will be stopped!\n&6Permission: &7thebridge.admin.reload")) {
       @Override
       public void execute(CommandSender sender, String[] args) {
-        if(!confirmations.contains(sender)) {
+        if (!confirmations.contains(sender)) {
           confirmations.add(sender);
           Bukkit.getScheduler().runTaskLater(registry.getPlugin(), () -> confirmations.remove(sender), 20 * 10);
           sender.sendMessage(chatManager.getPrefix() + chatManager.colorRawMessage("&cAre you sure you want to do this action? Type the command again &6within 10 seconds &cto confirm!"));
@@ -66,16 +66,16 @@ public class ReloadArgument {
         confirmations.remove(sender);
         Debugger.debug(Level.INFO, "Initiated plugin reload by {0}", sender.getName());
         long start = System.currentTimeMillis();
-        if(ArenaRegistry.getArenas().size() == 0) {
+        if (ArenaRegistry.getArenas().size() == 0) {
           Debugger.debug(Level.INFO, "[Reloader] There are no arenas to reload");
         } else {
-          for(Arena arena : ArenaRegistry.getArenas()) {
+          for (Arena arena : ArenaRegistry.getArenas()) {
             Debugger.debug(Level.INFO, "[Reloader] Stopping {0} instance.");
             long stopTime = System.currentTimeMillis();
-            for(Player player : arena.getPlayers()) {
+            for (Player player : arena.getPlayers()) {
               arena.doBarAction(Arena.BarAction.REMOVE, player);
               arena.teleportToEndLocation(player);
-              if(registry.getPlugin().getConfigPreferences().getOption(ConfigPreferences.Option.INVENTORY_MANAGER_ENABLED)) {
+              if (registry.getPlugin().getConfigPreferences().getOption(ConfigPreferences.Option.INVENTORY_MANAGER_ENABLED)) {
                 InventorySerializer.loadInventory(registry.getPlugin(), player);
               } else {
                 player.getInventory().clear();
@@ -87,16 +87,16 @@ public class ReloadArgument {
             ArenaManager.stopGame(true, arena);
             Debugger.debug(Level.INFO, "[Reloader] Instance {0} stopped took {1}ms", arena.getId(), System.currentTimeMillis() - stopTime);
           }
-          if(!ArenaRegistry.getArenas().isEmpty()) {
+          if (!ArenaRegistry.getArenas().isEmpty()) {
             ArenaRegistry.getArenas().forEach(Arena::cleanUpArena);
             new ArrayList<>(ArenaRegistry.getArenas()).forEach(ArenaRegistry::unregisterArena);
           }
         }
-        if(HologramManager.getArmorStands().size() == 0) {
+        if (HologramManager.getArmorStands().size() == 0) {
           Debugger.debug(Level.INFO, "[Reloader] There are no holograms to reload");
         } else {
           int removed = 0;
-          for(ArmorStand armorStand : HologramManager.getArmorStands()) {
+          for (ArmorStand armorStand : HologramManager.getArmorStands()) {
             armorStand.remove();
             armorStand.setCustomNameVisible(false);
             removed++;

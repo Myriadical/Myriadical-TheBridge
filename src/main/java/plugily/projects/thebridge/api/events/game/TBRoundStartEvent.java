@@ -12,7 +12,7 @@ public class TBRoundStartEvent extends TheBridgeEvent {
 
   private static final HandlerList handlers = new HandlerList();
 
-  public TBRoundStartEvent(Arena arena){
+  public TBRoundStartEvent(Arena arena) {
     super(arena);
   }
 

@@ -42,15 +42,15 @@ public class SetupUtilities {
   }
 
   public String isOptionDone(String path) {
-    if(config.isSet(path)) {
+    if (config.isSet(path)) {
       return color("&a&l✔ Completed &7(value: &8" + config.getString(path) + "&7)");
     }
     return color("&c&l✘ Not Completed");
   }
 
   public String isOptionDoneSection(String path, int minimum) {
-    if(config.isSet(path)) {
-      if(config.getConfigurationSection(path).getKeys(false).size() < minimum) {
+    if (config.isSet(path)) {
+      if (config.getConfigurationSection(path).getKeys(false).size() < minimum) {
         return color("&c&l✘ Not Completed | &cPlease add more locations");
       }
       return color("&a&l✔ Completed &7(value: &8" + config.getConfigurationSection(path).getKeys(false).size() + "&7)");
@@ -59,8 +59,8 @@ public class SetupUtilities {
   }
 
   public String isOptionDoneBool(String path) {
-    if(config.isSet(path)) {
-      if(Bukkit.getServer().getWorlds().get(0).getSpawnLocation().equals(LocationSerializer.getLocation(config.getString(path)))) {
+    if (config.isSet(path)) {
+      if (Bukkit.getServer().getWorlds().get(0).getSpawnLocation().equals(LocationSerializer.getLocation(config.getString(path)))) {
         return color("&c&l✘ Not Completed");
       }
       return color("&a&l✔ Completed");

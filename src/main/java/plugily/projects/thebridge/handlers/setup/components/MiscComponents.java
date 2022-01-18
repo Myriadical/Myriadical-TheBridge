@@ -62,14 +62,14 @@ public class MiscComponents implements SetupComponent {
   @Override
   public void injectComponents(StaticPane pane) {
     Arena arena = setupInventory.getArena();
-    if(arena == null) {
+    if (arena == null) {
       return;
     }
     Player player = setupInventory.getPlayer();
     FileConfiguration config = setupInventory.getConfig();
     Main plugin = setupInventory.getPlugin();
     ItemStack bungeeItem;
-    if(!plugin.getConfigPreferences().getOption(ConfigPreferences.Option.BUNGEE_ENABLED)) {
+    if (!plugin.getConfigPreferences().getOption(ConfigPreferences.Option.BUNGEE_ENABLED)) {
       bungeeItem = new ItemBuilder(XMaterial.OAK_SIGN.parseMaterial())
         .name(plugin.getChatManager().colorRawMessage("&e&lAdd Game Sign"))
         .lore(ChatColor.GRAY + "Target a sign and click this.")
@@ -84,16 +84,16 @@ public class MiscComponents implements SetupComponent {
         .build();
     }
     pane.addItem(new GuiItem(bungeeItem, e -> {
-      if(plugin.getConfigPreferences().getOption(ConfigPreferences.Option.BUNGEE_ENABLED)) {
+      if (plugin.getConfigPreferences().getOption(ConfigPreferences.Option.BUNGEE_ENABLED)) {
         return;
       }
       e.getWhoClicked().closeInventory();
       Location location = player.getTargetBlock(null, 10).getLocation();
-      if(!(location.getBlock().getState() instanceof Sign)) {
+      if (!(location.getBlock().getState() instanceof Sign)) {
         player.sendMessage(plugin.getChatManager().colorRawMessage("&c&l✘ &cPlease look at sign to add as a game sign!"));
         return;
       }
-      if(location.distance(e.getWhoClicked().getWorld().getSpawnLocation()) <= Bukkit.getServer().getSpawnRadius()
+      if (location.distance(e.getWhoClicked().getWorld().getSpawnLocation()) <= Bukkit.getServer().getSpawnRadius()
         && e.getClick() != ClickType.SHIFT_LEFT) {
         e.getWhoClicked().sendMessage(plugin.getChatManager().colorRawMessage("&c&l✖ &cWarning | Server spawn protection is set to &6" + Bukkit.getServer().getSpawnRadius()
           + " &cand sign you want to place is in radius of this protection! &c&lNon opped players won't be able to interact with this sign and can't join the game so."));

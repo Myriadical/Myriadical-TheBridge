@@ -9,7 +9,7 @@ public class TBRoundResetEvent extends TheBridgeEvent {
   private static final HandlerList handlers = new HandlerList();
   private final int actualRound;
 
-  public TBRoundResetEvent(Arena arena, int round){
+  public TBRoundResetEvent(Arena arena, int round) {
     super(arena);
     this.actualRound = round;
   }
@@ -23,7 +23,7 @@ public class TBRoundResetEvent extends TheBridgeEvent {
     return handlers;
   }
 
-  public int getNewRound(){
+  public int getNewRound() {
     return actualRound;
   }
 }

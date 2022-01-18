@@ -116,7 +116,7 @@ public class SetupInventory {
 
   private void sendProTip(Player p) {
     int rand = random.nextInt(8 + 1);
-    switch(rand) {
+    switch (rand) {
       case 2:
         p.sendMessage(plugin.getChatManager().colorRawMessage("&e&lTIP: &7Help us translating plugin to your language here: https://translate.plugily.xyz"));
         break;
@@ -142,7 +142,7 @@ public class SetupInventory {
 
   public void openInventory() {
     //check does not work because of prepared guis
-    if(BaseUtilities.isEditing(player)) {
+    if (BaseUtilities.isEditing(player)) {
       openBases();
       return;
     }

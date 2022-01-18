@@ -83,12 +83,12 @@ public class Base {
   }
 
   public String getMaterialColor() {
-    switch(color.toLowerCase()) {
+    switch (color.toLowerCase()) {
       case "dark_blue":
       case "dark_aqua":
       case "aqua":
         return "light_blue";
-      case  "dark_green":
+      case "dark_green":
         return "green";
       case "green":
         return "lime";
@@ -100,7 +100,7 @@ public class Base {
         return "gray";
       case "light_purple":
         return "magenta";
-        //not used? BROWN, PINK, ORANGE
+      //not used? BROWN, PINK, ORANGE
     }
     return color;
   }
@@ -142,15 +142,15 @@ public class Base {
   }
 
   public boolean addPlayer(Player player) {
-    if(players.contains(player)) {
+    if (players.contains(player)) {
       player.sendMessage(plugin.getChatManager().colorMessage("Bases.Team.Member"));
       return false;
     }
-    if(players.size() >= maximumSize) {
+    if (players.size() >= maximumSize) {
       player.sendMessage(plugin.getChatManager().colorMessage("Bases.Team.Full"));
       return false;
     }
-    if(ArenaRegistry.getArena(player).inBase(player)) {
+    if (ArenaRegistry.getArena(player).inBase(player)) {
       ArenaRegistry.getArena(player).getBase(player).removePlayer(player);
     }
     this.players.add(player);
@@ -230,7 +230,7 @@ public class Base {
   }
 
   public void removeCageFloor() {
-    if(!checkCageFloor(cageBlock)) {
+    if (!checkCageFloor(cageBlock)) {
       return;
     }
     cageCuboid.fill(Material.AIR);
@@ -241,20 +241,20 @@ public class Base {
   }
 
   public void addCageFloor() {
-    if(!checkCageFloor(cageBlock)) {
+    if (!checkCageFloor(cageBlock)) {
       return;
     }
     cageCuboid.fill(cageBlock);
   }
 
   private boolean checkCageFloor(Material cageBlock) {
-    if(cageCuboid == null) {
+    if (cageCuboid == null) {
       return false;
     }
-    if(cageBlock == null) {
+    if (cageBlock == null) {
       return false;
     }
-    if(cageBlock == Material.AIR) {
+    if (cageBlock == Material.AIR) {
       Debugger.sendConsoleMsg("[The Bridge] &cARENA SETUP PROBLEM | Please only select your floor of the cage to setup it proper! We found Material Air on the selected area!");
       return false;
     }

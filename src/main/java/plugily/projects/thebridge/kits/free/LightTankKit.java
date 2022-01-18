@@ -59,11 +59,11 @@ public class LightTankKit extends FreeKit {
     player.getInventory().addItem(new ItemStack(XMaterial.COOKED_PORKCHOP.parseMaterial(), 8));
     ArmorHelper.setArmor(player, ArmorHelper.ArmorType.IRON);
     player.getInventory().addItem(WeaponHelper.getEnchanted(XMaterial.DIAMOND_PICKAXE.parseItem(), new Enchantment[]{
-        Enchantment.DURABILITY, Enchantment.DIG_SPEED}, new int[]{10, 2}));
+      Enchantment.DURABILITY, Enchantment.DIG_SPEED}, new int[]{10, 2}));
     VersionUtils.setMaxHealth(player, 26.0);
     player.setHealth(26.0);
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     addBuildBlocks(player, arena);
@@ -77,7 +77,7 @@ public class LightTankKit extends FreeKit {
   @Override
   public void reStock(Player player) {
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
+    if (arena == null || arena.getArenaState() != ArenaState.IN_GAME) {
       return;
     }
     addBuildBlocks(player, arena);

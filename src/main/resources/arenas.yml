@@ -23,5 +23,5 @@ instances:
     # POINTS -> FIRST TEAM WHO REACH THE POINTS WIN
     mode: POINTS
     modevalue: 5
-    signs: []
+    signs: [ ]
     isdone: false

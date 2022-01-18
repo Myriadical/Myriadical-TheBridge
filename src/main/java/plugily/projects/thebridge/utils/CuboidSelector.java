@@ -70,17 +70,17 @@ public class CuboidSelector implements Listener {
 
   @EventHandler
   public void onWandUse(PlayerInteractEvent e) {
-    if(!Utils.isNamed(e.getItem()) || !e.getItem().getItemMeta().getDisplayName().equals(plugin.getChatManager().colorRawMessage("&6&lLocation wand"))) {
+    if (!Utils.isNamed(e.getItem()) || !e.getItem().getItemMeta().getDisplayName().equals(plugin.getChatManager().colorRawMessage("&6&lLocation wand"))) {
       return;
     }
     e.setCancelled(true);
-    switch(e.getAction()) {
+    switch (e.getAction()) {
       case LEFT_CLICK_BLOCK:
         selections.put(e.getPlayer(), new Selection(e.getClickedBlock().getLocation(), null));
         e.getPlayer().sendMessage(plugin.getChatManager().colorRawMessage(plugin.getChatManager().getPrefix() + "&eNow select top corner using right click!"));
         break;
       case RIGHT_CLICK_BLOCK:
-        if(!selections.containsKey(e.getPlayer())) {
+        if (!selections.containsKey(e.getPlayer())) {
           e.getPlayer().sendMessage(plugin.getChatManager().colorRawMessage(plugin.getChatManager().getPrefix() + "&cPlease select bottom corner using left click first!"));
           break;
         }
@@ -93,7 +93,7 @@ public class CuboidSelector implements Listener {
         e.getPlayer().sendMessage(plugin.getChatManager().colorRawMessage(plugin.getChatManager().getPrefix() + "&cPlease keep in mind to use blocks instead of player location for precise coordinates!"));
         break;
       case RIGHT_CLICK_AIR:
-        if(!selections.containsKey(e.getPlayer())) {
+        if (!selections.containsKey(e.getPlayer())) {
           e.getPlayer().sendMessage(plugin.getChatManager().colorRawMessage(plugin.getChatManager().getPrefix() + "&cPlease select bottom corner using left click first!"));
           break;
         }

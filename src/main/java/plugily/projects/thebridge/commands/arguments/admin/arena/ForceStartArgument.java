@@ -37,7 +37,7 @@ public class ForceStartArgument {
 
   public ForceStartArgument(ArgumentsRegistry registry, ChatManager chatManager) {
     registry.mapArgument("thebridgeadmin", new LabeledCommandArgument("forcestart", "thebridge.admin.forcestart", CommandArgument.ExecutorType.PLAYER,
-        new LabelData("/tba forcestart", "/tba forcestart", "&7Force starts arena you're in\n&6Permission: &7thebridge.admin.forcestart")) {
+      new LabelData("/tba forcestart", "/tba forcestart", "&7Force starts arena you're in\n&6Permission: &7thebridge.admin.forcestart")) {
       @Override
       public void execute(CommandSender sender, String[] args) {
         ArenaUtils.arenaForceStart((Player) sender);

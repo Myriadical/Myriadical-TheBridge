@@ -39,8 +39,8 @@ public class ArenaUtils {
 
   public static int emptyBases(Arena arena) {
     return (int) arena.getBases().stream()
-        .filter(base -> base.getPlayersSize() == 0)
-        .count();
+      .filter(base -> base.getPlayersSize() == 0)
+      .count();
   }
 
   public static boolean areInSameArena(Player one, Player two) {
@@ -48,21 +48,21 @@ public class ArenaUtils {
   }
 
   public static void hidePlayer(Player p, Arena arena) {
-    for(Player player : arena.getPlayers()) {
+    for (Player player : arena.getPlayers()) {
       VersionUtils.hidePlayer(plugin, player, p);
     }
   }
 
   public static void showPlayer(Player p, Arena arena) {
-    for(Player player : arena.getPlayers()) {
+    for (Player player : arena.getPlayers()) {
       VersionUtils.showPlayer(plugin, player, p);
     }
   }
 
   public static void resetPlayerAfterGame(Player player) {
-    for(Player players : plugin.getServer().getOnlinePlayers()) {
+    for (Player players : plugin.getServer().getOnlinePlayers()) {
       VersionUtils.showPlayer(plugin, player, players);
-      if(!ArenaRegistry.isInArena(players)) {
+      if (!ArenaRegistry.isInArena(players)) {
         VersionUtils.showPlayer(plugin, players, player);
       }
     }
@@ -80,14 +80,14 @@ public class ArenaUtils {
     player.setLevel(0);
     player.setExp(0);
     VersionUtils.setCollidable(player, true);
-    if(plugin.getConfigPreferences().getOption(ConfigPreferences.Option.INVENTORY_MANAGER_ENABLED)) {
+    if (plugin.getConfigPreferences().getOption(ConfigPreferences.Option.INVENTORY_MANAGER_ENABLED)) {
       InventorySerializer.loadInventory(plugin, player);
     }
   }
 
   public static void hidePlayersOutsideTheGame(Player player, Arena arena) {
-    for(Player players : plugin.getServer().getOnlinePlayers()) {
-      if(arena.getPlayers().contains(players)) {
+    for (Player players : plugin.getServer().getOnlinePlayers()) {
+      if (arena.getPlayers().contains(players)) {
         continue;
       }
       VersionUtils.hidePlayer(plugin, player, players);
@@ -96,22 +96,22 @@ public class ArenaUtils {
   }
 
   public static void arenaForceStart(Player player) {
-    if(!Utils.hasPermission(player, "thebridge.admin.forcestart")) {
+    if (!Utils.hasPermission(player, "thebridge.admin.forcestart")) {
       return;
     }
-    if(!Utils.checkIsInGameInstance(player)) {
+    if (!Utils.checkIsInGameInstance(player)) {
       return;
     }
     Arena arena = ArenaRegistry.getArena(player);
-    if(arena.getPlayers().size() < 2) {
+    if (arena.getPlayers().size() < 2) {
       plugin.getChatManager().broadcast(arena, plugin.getChatManager().formatMessage(arena, plugin.getChatManager().colorMessage("In-Game.Messages.Lobby-Messages.Waiting-For-Players"), arena.getMinimumPlayers()));
       return;
     }
-    if(arena.getArenaState() == ArenaState.WAITING_FOR_PLAYERS || arena.getArenaState() == ArenaState.STARTING) {
+    if (arena.getArenaState() == ArenaState.WAITING_FOR_PLAYERS || arena.getArenaState() == ArenaState.STARTING) {
       arena.setArenaState(ArenaState.STARTING);
       arena.setForceStart(true);
       arena.setTimer(0);
-      for(Player players : ArenaRegistry.getArena(player).getPlayers()) {
+      for (Player players : ArenaRegistry.getArena(player).getPlayers()) {
         players.sendMessage(plugin.getChatManager().getPrefix() + plugin.getChatManager().colorMessage("In-Game.Messages.Admin-Messages.Set-Starting-In-To-0"));
       }
     }

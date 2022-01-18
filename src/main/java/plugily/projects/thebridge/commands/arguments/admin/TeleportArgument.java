@@ -39,28 +39,28 @@ public class TeleportArgument {
 
   public TeleportArgument(ArgumentsRegistry registry) {
     registry.mapArgument("thebridgeadmin", new LabeledCommandArgument("tp", "thebridge.admin.teleport", CommandArgument.ExecutorType.PLAYER,
-        new LabelData("/tba tp &6<arena> <location type>", "/tba tp <arena> <location>",
-            "&7Teleport you to provided arena location\n&7Valid locations:\n&7• LOBBY - lobby location\n&7• START - starting location\n"
-                + "&7• END - ending location\n&6Permission: &7thebridge.admin.teleport")) {
+      new LabelData("/tba tp &6<arena> <location type>", "/tba tp <arena> <location>",
+        "&7Teleport you to provided arena location\n&7Valid locations:\n&7• LOBBY - lobby location\n&7• START - starting location\n"
+          + "&7• END - ending location\n&6Permission: &7thebridge.admin.teleport")) {
       @Override
       public void execute(CommandSender sender, String[] args) {
-        if(args.length == 1) {
+        if (args.length == 1) {
           sender.sendMessage(registry.getPlugin().getChatManager().getPrefix() + registry.getPlugin().getChatManager().colorMessage("Commands.Type-Arena-Name"));
           return;
         }
-        if(args.length == 2) {
+        if (args.length == 2) {
           sender.sendMessage(registry.getPlugin().getChatManager().getPrefix() + ChatColor.RED + "Please type location type: " + Arrays.toString(LocationType.values()).replace("[", "").replace("]", ""));
           return;
         }
         Player player = (Player) sender;
         try {
           LocationType.valueOf(args[2].toUpperCase());
-        } catch(Exception e) {
+        } catch (Exception e) {
           sender.sendMessage(registry.getPlugin().getChatManager().getPrefix() + ChatColor.RED + "Please type location type: " + Arrays.toString(LocationType.values()).replace("[", "").replace("]", ""));
           return;
         }
-        for(Arena arena : ArenaRegistry.getArenas()) {
-          if(arena.getId().equalsIgnoreCase(args[1])) {
+        for (Arena arena : ArenaRegistry.getArenas()) {
+          if (arena.getId().equalsIgnoreCase(args[1])) {
             teleport(player, arena, LocationType.valueOf(args[2].toUpperCase()));
             break;
           }
@@ -70,9 +70,9 @@ public class TeleportArgument {
   }
 
   private void teleport(Player player, Arena arena, LocationType locationType) {
-    switch(locationType) {
+    switch (locationType) {
       case LOBBY:
-        if(arena.getLobbyLocation() == null) {
+        if (arena.getLobbyLocation() == null) {
           player.sendMessage(ChatColor.RED + "Lobby location isn't set for this arena!");
           return;
         }
@@ -80,7 +80,7 @@ public class TeleportArgument {
         player.sendMessage(ChatColor.GRAY + "Teleported to LOBBY location from arena " + arena.getId());
         break;
       case START:
-        if(arena.getLobbyLocation() == null) {
+        if (arena.getLobbyLocation() == null) {
           player.sendMessage(ChatColor.RED + "Start location isn't set for this arena!");
           return;
         }
@@ -88,7 +88,7 @@ public class TeleportArgument {
         player.sendMessage(ChatColor.GRAY + "Teleported to START location from arena " + arena.getId());
         break;
       case END:
-        if(arena.getLobbyLocation() == null) {
+        if (arena.getLobbyLocation() == null) {
           player.sendMessage(ChatColor.RED + "End location isn't set for this arena!");
           return;
         }
@@ -96,7 +96,7 @@ public class TeleportArgument {
         player.sendMessage(ChatColor.GRAY + "Teleported to END location from arena " + arena.getId());
         break;
       case MID:
-        if(arena.getMidLocation() == null) {
+        if (arena.getMidLocation() == null) {
           player.sendMessage(ChatColor.RED + "Mid location isn't set for this arena!");
           return;
         }
@@ -104,7 +104,7 @@ public class TeleportArgument {
         player.sendMessage(ChatColor.GRAY + "Teleported to MID location from arena " + arena.getId());
         break;
       case SPECTATOR:
-        if(arena.getSpectatorLocation() == null) {
+        if (arena.getSpectatorLocation() == null) {
           player.sendMessage(ChatColor.RED + "SPECTATOR location isn't set for this arena!");
           return;
         }

@@ -68,7 +68,7 @@ public class Utils {
    * @return serialized number
    */
   public static int serializeInt(Integer i) {
-    if(i == 0) return 9; //The function bellow doesn't work if i == 0, so return 9 in case that happens.
+    if (i == 0) return 9; //The function bellow doesn't work if i == 0, so return 9 in case that happens.
     return (i % 9) == 0 ? i : (i + 9 - 1) / 9 * 9;
   }
 
@@ -88,15 +88,15 @@ public class Utils {
 
       @Override
       public void run() {
-        if(!ArenaRegistry.isInArena(p) || ArenaRegistry.getArena(p).getArenaState() != ArenaState.IN_GAME) {
+        if (!ArenaRegistry.isInArena(p) || ArenaRegistry.getArena(p).getArenaState() != ArenaState.IN_GAME) {
           this.cancel();
         }
-        if(ticks >= seconds * 20) {
+        if (ticks >= seconds * 20) {
           this.cancel();
         }
         String progress = StringFormatUtils.getProgressBar(ticks, seconds * 20, 10, "■", ChatColor.COLOR_CHAR + "a", ChatColor.COLOR_CHAR + "c");
         VersionUtils.sendActionBar(p, plugin.getChatManager().colorMessage("In-Game.Cooldown-Format", p)
-            .replace("%progress%", progress).replace("%time%", String.valueOf((double) ((seconds * 20) - ticks) / 20)));
+          .replace("%progress%", progress).replace("%time%", String.valueOf((double) ((seconds * 20) - ticks) / 20)));
         ticks += 10;
       }
     }.runTaskTimer(plugin, 0, 10);
@@ -104,9 +104,9 @@ public class Utils {
 
   public static List<Block> getNearbyBlocks(Location location, int radius) {
     List<Block> blocks = new ArrayList<>();
-    for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
-      for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
-        for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
+    for (int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
+      for (int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
+        for (int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
           blocks.add(location.getWorld().getBlockAt(x, y, z));
         }
       }
@@ -118,17 +118,17 @@ public class Utils {
     double x = location.getX();
     double z = location.getZ();
     Location center = location.clone();
-    if(x % 1 == 0) {
+    if (x % 1 == 0) {
       center.add(0.5, 0, 0);
     }
-    if(z % 1 == 0) {
+    if (z % 1 == 0) {
       center.add(0, 0, 0.5);
     }
     return center;
   }
 
   public static boolean checkIsInGameInstance(Player player) {
-    if(!ArenaRegistry.isInArena(player)) {
+    if (!ArenaRegistry.isInArena(player)) {
       player.sendMessage(plugin.getChatManager().getPrefix() + plugin.getChatManager().colorMessage("Commands.Not-Playing", player));
       return false;
     }
@@ -136,7 +136,7 @@ public class Utils {
   }
 
   public static boolean hasPermission(CommandSender sender, String perm) {
-    if(sender.hasPermission(perm)) {
+    if (sender.hasPermission(perm)) {
       return true;
     }
     sender.sendMessage(plugin.getChatManager().getPrefix() + plugin.getChatManager().colorMessage("Commands.No-Permission"));
@@ -146,9 +146,9 @@ public class Utils {
   public static Vector rotateAroundAxisX(Vector v, double angle) {
     angle = Math.toRadians(angle);
     double cos = Math.cos(angle),
-        sin = Math.sin(angle),
-        y = v.getY() * cos - v.getZ() * sin,
-        z = v.getY() * sin + v.getZ() * cos;
+      sin = Math.sin(angle),
+      y = v.getY() * cos - v.getZ() * sin,
+      z = v.getY() * sin + v.getZ() * cos;
     return v.setY(y).setZ(z);
   }
 
@@ -156,22 +156,22 @@ public class Utils {
     angle = -angle;
     angle = Math.toRadians(angle);
     double cos = Math.cos(angle),
-        sin = Math.sin(angle),
-        x = v.getX() * cos + v.getZ() * sin,
-        z = v.getX() * -sin + v.getZ() * cos;
+      sin = Math.sin(angle),
+      x = v.getX() * cos + v.getZ() * sin,
+      z = v.getX() * -sin + v.getZ() * cos;
     return v.setX(x).setZ(z);
   }
 
   public static String matchColorRegex(String s) {
     String regex = "&?#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})";
     Matcher matcher = Pattern.compile(regex).matcher(s);
-    while(matcher.find()) {
+    while (matcher.find()) {
       String group = matcher.group(0);
       String group2 = matcher.group(1);
 
       try {
         s = s.replace(group, net.md_5.bungee.api.ChatColor.of("#" + group2) + "");
-      } catch(Exception e) {
+      } catch (Exception e) {
         Debugger.debug("Bad hex color match: " + group);
       }
     }
@@ -183,7 +183,7 @@ public class Utils {
     List<String> matchList = new ArrayList<>();
     Pattern regex = Pattern.compile(".{1," + max + "}(?:\\s|$)", Pattern.DOTALL);
     Matcher regexMatcher = regex.matcher(string);
-    while(regexMatcher.find()) {
+    while (regexMatcher.find()) {
       matchList.add(plugin.getChatManager().colorRawMessage("&7") + regexMatcher.group());
     }
     return matchList;
@@ -205,7 +205,7 @@ public class Utils {
     try {
       Integer.parseInt(s);
       return true;
-    } catch(NumberFormatException ex) {
+    } catch (NumberFormatException ex) {
       return false;
     }
   }
