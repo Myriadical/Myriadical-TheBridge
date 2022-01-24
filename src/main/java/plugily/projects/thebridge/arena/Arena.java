@@ -261,9 +261,9 @@ public class Arena extends BukkitRunnable {
             VersionUtils.sendTitles(p, title, subtitle, 5, 40, 5);
              */
             p.playSound(p.getLocation(), Objects.requireNonNull(XSound.matchXSound("BLOCK_NOTE_BLOCK_PLING").get().parseSound()), 1.0F, 1.0F);
-            if (resetRound == 1) {
+            /*if (resetRound == 1) {
               p.sendMessage(chatManager.colorMessage("In-Game.Messages.Blocked.Run"));
-            }
+            }*/
           }
           if (resetRound == 1) {
             Bukkit.getPluginManager().callEvent(new TBRoundStartEvent(this));
@@ -662,7 +662,7 @@ public class Arena extends BukkitRunnable {
     resetHits();
     for (Player player : getPlayersLeft()) {
       player.teleport(getBase(player).getPlayerSpawnPoint());
-      player.sendMessage(chatManager.colorMessage("In-Game.Messages.Blocked.Reset"));
+      //player.sendMessage(chatManager.colorMessage("In-Game.Messages.Blocked.Reset"));
       player.setHealth(VersionUtils.getHealth(player));
       player.getInventory().clear();
       player.setFireTicks(0);
